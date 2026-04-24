@@ -1,0 +1,73 @@
+body {
+    font-family: 'Mitr', sans-serif;
+}
+
+/* CSS สำหรับเอฟเฟกต์ดวงดาว */
+@keyframes fadeInStars {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.stars-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeInStars 2s ease-in-out forwards;
+    animation-delay: 0.5s;
+}
+
+.stars {
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow:
+        10vw 10vh #fff, 25vw 15vh #fff, 40vw 5vh #fff, 55vw 20vh #fff, 70vw 10vh #fff, 85vw 18vh #fff,
+        5vw 30vh #fff, 20vw 40vh #f0f0f0, 35vw 35vh #fff, 50vw 45vh #fff, 65vw 30vh #fafafa, 80vw 40vh #fff, 95vw 35vh #fff,
+        15vw 55vh #fff, 30vw 60vh #fff, 45vw 50vh #f0f0f0, 60vw 65vh #fff, 75vw 55vh #fff, 90vw 60vh #fff,
+        10vw 75vh #fafafa, 25vw 85vh #fff, 40vw 80vh #fff, 55vw 90vh #fff, 70vw 75vh #fff, 85vw 88vh #f0f0f0,
+        5vw 95vh #fff, 95vw 92vh #fff;
+
+    @media (min-width: 1024px) {
+        box-shadow:
+            10vw 10vh #fff, 25vw 15vh #fff, 40vw 5vh #fff, 55vw 20vh #fff, 70vw 10vh #fff, 85vw 18vh #fff,
+            5vw 30vh #fff, 20vw 40vh #f0f0f0, 35vw 35vh #fff, 50vw 45vh #fff, 65vw 30vh #fafafa, 80vw 40vh #fff, 95vw 35vh #fff,
+            15vw 55vh #fff, 30vw 60vh #fff, 45vw 50vh #f0f0f0, 60vw 65vh #fff, 75vw 55vh #fff, 90vw 60vh #fff,
+            10vw 75vh #fafafa, 25vw 85vh #fff, 40vw 80vh #fff, 55vw 90vh #fff, 70vw 75vh #fff, 85vw 88vh #f0f0f0,
+            5vw 95vh #fff, 95vw 92vh #fff,
+            18vw 12vh 1px #fff, 33vw 22vh 1px #fff, 48vw 8vh 1px #fff, 63vw 28vh 1px #f0f0f0, 78vw 15vh 1px #fff,
+            12vw 38vh 1px #fff, 28vw 48vh 1px #fff, 43vw 42vh 1px #fafafa, 58vw 52vh 1px #fff, 73vw 38vh 1px #fff,
+            22vw 62vh 1px #fff, 38vw 72vh 1px #f0f0f0, 53vw 68vh 1px #fff, 68vw 78vh 1px #fff, 83vw 65vh 1px #fafafa,
+            15vw 82vh 1px #fff, 30vw 92vh 1px #fff, 45vw 88vh 1px #fff, 60vw 98vh 1px #fff, 75vw 85vh 1px #f0f0f0;
+    }
+}
+
+.stars-2 {
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow:
+        15vw 20vh #fff, 35vw 10vh #f0f0f0, 55vw 25vh #fff, 75vw 15vh #fafafa, 95vw 22vh #fff,
+        20vw 45vh #fff, 40vw 50vh #fff, 60vw 40vh #f0f0f0, 80vw 55vh #fff,
+        10vw 65vh #fff, 30vw 70vh #fafafa, 50vw 60vh #fff, 70vw 80vh #fff, 90vw 72vh #fff,
+        25vw 90vh #f0f0f0, 45vw 95vh #fff, 65vw 85vh #fff, 85vw 98vh #fff;
+
+    @media (min-width: 1024px) {
+        box-shadow:
+            15vw 20vh #fff, 35vw 10vh #f0f0f0, 55vw 25vh #fff, 75vw 15vh #fafafa, 95vw 22vh #fff,
+            20vw 45vh #fff, 40vw 50vh #fff, 60vw 40vh #f0f0f0, 80vw 55vh #fff,
+            10vw 65vh #fff, 30vw 70vh #fafafa, 50vw 60vh #fff, 70vw 80vh #fff, 90vw 72vh #fff,
+            25vw 90vh #f0f0f0, 45vw 95vh #fff, 65vw 85vh #fff, 85vw 98vh #fff,
+            5vw 5vh #fff, 50vw 5vh #fff, 90vw 5vh #f0f0f0,
+            25vw 25vh #fff, 75vw 25vh #fff,
+            10vw 50vh #fafafa, 90vw 50vh #fff,
+            25vw 75vh #fff, 75vw 75vh #f0f0f0,
+            5vw 95vh #fff, 50vw 95vh #fff, 90vw 95vh #fff;
+    }
+}
