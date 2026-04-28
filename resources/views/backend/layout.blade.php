@@ -11,7 +11,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 
+    {{-- Alpine --}}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+    {{-- Apexcharts --}}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo/na-logo.png') }}">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/logo/na-logo.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/logo/na-logo.png') }}">
 
     {{-- font-awesome --}}
     <link href="{{ asset('assets/font-awesome/css/all.min.css') }}" rel="stylesheet">
@@ -21,7 +30,7 @@
 
     {{-- css --}}
     <link rel="stylesheet" href="{{ asset('/assets/css/style.css') }}">
-    <title>Backend</title>
+    <title>Nahost | Backend</title>
 </head>
 
 <body>

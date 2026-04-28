@@ -34,19 +34,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('products') }}"
+                    <a href="{{ route('frontend.products') }}"
                         class="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 block text-center w-full text-gray-500 hover:text-purple-600 hover:bg-purple-50">
                         สินค้าหลัก
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('game-topup') }}"
+                    <a href="{{ route('frontend.game.index') }}"
                         class="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 block text-center w-full text-gray-500 hover:text-purple-600 hover:bg-purple-50">
                         เติมเกม
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('topup') }}"
+                    <a href="{{ route('frontend.topup') }}"
                         class="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 block text-center w-full text-gray-500 hover:text-purple-600 hover:bg-purple-50">
                         เติมเงิน
                     </a>
@@ -74,13 +74,13 @@
                                         class="text-sm text-slate-600 hover:text-purple-600 p-2 rounded-lg hover:bg-white transition-colors"><i
                                             class="fa-regular fa-gauge mr-2"></i> ระบบหลังบ้าน</a>
                                 @endif
-                                <a href="#"
+                                <a href="{{ route('frontend.profile.edit')}}"
                                     class="text-sm text-slate-600 hover:text-purple-600 p-2 rounded-lg hover:bg-white transition-colors"><i
                                         class="fa-regular fa-user-pen mr-2"></i> แก้ไขโปรไฟล์</a>
-                                <a href="#"
+                                <a href="{{ route('frontend.history') }}"
                                     class="text-sm text-slate-600 hover:text-purple-600 p-2 rounded-lg hover:bg-white transition-colors"><i
                                         class="fa-regular fa-bag-shopping mr-2"></i> ประวัติการซื้อ</a>
-                                <a href="#"
+                                <a href="{{route('frontend.topup.history')}}"
                                     class="text-sm text-slate-600 hover:text-purple-600 p-2 rounded-lg hover:bg-white transition-colors"><i
                                         class="fa-regular fa-money-bill-transfer mr-2"></i> ประวัติเติมเงิน</a>
                             </div>
@@ -133,15 +133,15 @@
                                     <i class="fa-regular fa-gauge w-5 text-center mr-1"></i> ระบบหลังบ้าน
                                 </a>
                             @endif
-                            <a href="#"
+                            <a href="{{ route('frontend.profile.edit')}}"
                                 class="px-3 py-2 text-sm text-slate-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors">
                                 <i class="fa-regular fa-user-pen w-5 text-center mr-1"></i> แก้ไขโปรไฟล์
                             </a>
-                            <a href="#"
+                            <a href="{{ route('frontend.history') }}"
                                 class="px-3 py-2 text-sm text-slate-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors">
                                 <i class="fa-regular fa-bag-shopping w-5 text-center mr-1"></i> ประวัติการซื้อ
                             </a>
-                            <a href="#"
+                            <a href="{{route('frontend.topup.history')}}"
                                 class="px-3 py-2 text-sm text-slate-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors">
                                 <i class="fa-regular fa-money-bill-transfer w-5 text-center mr-1"></i> ประวัติเติมเงิน
                             </a>

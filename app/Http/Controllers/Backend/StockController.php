@@ -17,24 +17,21 @@ class StockController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::where('is_visible', 1)->get();
         return view('backend.stock-create', compact('categories'));
     }
-
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'item_name'   => 'required|string|max:255',
             'category_id' => 'required',
-            'price'       => 'required|numeric',
         ]);
 
         Stock::create([
             'item_name'   => $request->item_name,
             'category_id' => $request->category_id,
-            'price'       => $request->price,
-            'status'      => $request->status ?? 'draft',
+            'status'      => $request->status ?? 'พร้อมขาย',
             'is_featured' => $request->has('is_featured') ? 1 : 0,
             'description' => $request->description,
         ]);
@@ -53,13 +50,11 @@ class StockController extends Controller
         $validated = $request->validate([
             'item_name'   => 'required|string|max:255',
             'category_id' => 'required',
-            'price'       => 'required|numeric',
         ]);
 
         $stock->update([
             'item_name'   => $request->item_name,
             'category_id' => $request->category_id,
-            'price'       => $request->price,
             'status'      => $request->status,
             'is_featured' => $request->has('is_featured') ? 1 : 0,
             'description' => $request->description,
@@ -67,6 +62,7 @@ class StockController extends Controller
 
         return redirect()->route('backend.stock')->with('success', 'แก้ไขสินค้าสำเร็จ');
     }
+
     public function destroy(Stock $stock)
     {
         $stock->delete();

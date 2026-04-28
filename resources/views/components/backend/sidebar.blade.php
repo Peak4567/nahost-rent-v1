@@ -51,28 +51,25 @@
                 <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 group-hover:text-[#7C3AED] transition-transform"
                     :class="openStock ? 'rotate-180' : ''"></i>
             </button>
+
             <div x-show="openStock" class="flex flex-col pl-12 pr-4 py-2 space-y-2">
-                <a href="#" class="text-sm text-slate-500 hover:text-[#7C3AED]">เพิ่มสินค้าใหม่</a>
+                <a href="{{ route('backend.product.index') }}"
+                    class="text-sm text-slate-500 hover:text-[#7C3AED]">เพิ่มสินค้าใหม่</a>
                 <a href="{{ route('backend.category.index') }}"
-                    class="text-sm text-slate-500 hover:text-[#7C3AED]text-[#7C3AED]">จัดการหมวดหมู่</a>
+                    class="text-sm text-slate-500 hover:text-[#7C3AED]">จัดการหมวดหมู่</a>
+                <a href="{{ route('backend.game.index') }}"
+                    class="text-sm text-slate-500 hover:text-[#7C3AED]">จัดการเกมเติมเงิน</a>
             </div>
         </div>
 
-        <a href="#"
+        <a href="{{ route('backend.users') }}"
             class="flex items-center px-4 py-3 text-slate-600 rounded-xl hover:bg-slate-50 hover:text-[#7C3AED] transition-colors group">
             <i
                 class="fa-solid fa-users w-5 text-center mr-3 text-lg text-slate-400 group-hover:text-[#7C3AED] transition-colors"></i>
             <span class="text-sm">จัดการผู้ใช้</span>
         </a>
 
-        <a href="#"
-            class="flex items-center px-4 py-3 text-slate-600 rounded-xl hover:bg-slate-50 hover:text-[#7C3AED] transition-colors group">
-            <i
-                class="fa-solid fa-bullhorn w-5 text-center mr-3 text-lg text-slate-400 group-hover:text-[#7C3AED] transition-colors"></i>
-            <span class="text-sm">โฆษณา</span>
-        </a>
-
-        <a href="#"
+        <a href="{{ route('backend.payment.edit') }}"
             class="flex items-center px-4 py-3 text-slate-600 rounded-xl hover:bg-slate-50 hover:text-[#7C3AED] transition-colors group">
             <i
                 class="fa-solid fa-credit-card w-5 text-center mr-3 text-lg text-slate-400 group-hover:text-[#7C3AED] transition-colors"></i>
@@ -81,7 +78,7 @@
 
         <div class="h-px bg-slate-100 my-4 mx-4"></div>
 
-        <a href="#"
+        <a href="{{ route('backend.settings.edit') }}"
             class="flex items-center px-4 py-3 text-slate-600 rounded-xl hover:bg-slate-50 hover:text-[#7C3AED] transition-colors group">
             <i
                 class="fa-solid fa-gear w-5 text-center mr-3 text-lg text-slate-400 group-hover:text-[#7C3AED] transition-colors"></i>

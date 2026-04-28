@@ -60,268 +60,77 @@
 
     <section class="py-12 font-mitr">
         <div class="max-w-screen-xl mx-auto px-4">
-
+            {{-- Header --}}
             <div class="flex items-start gap-3 mb-6">
                 <div class="bg-purple-600 p-2.5 rounded-lg text-white text-2xl">
                     <i class="fa-solid fa-bag-shopping"></i>
                 </div>
                 <div>
                     <h2 class="text-black text-2xl md:text-3xl leading-none font-medium">สินค้าแนะนำ!</h2>
-                    <p class="text-gray-400 text-sm md:text-base mt-1">เป็นสินค้าแนะนำหรือขายดีที่สุดภายในร้านค้าของเราเอง!
-                    </p>
+                    <p class="text-gray-400 text-sm md:text-base mt-1">สินค้าคัดสรรพิเศษเพื่อคุณ</p>
                 </div>
             </div>
-
             <hr class="border-gray-200 mb-8">
 
+            {{-- Grid --}}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                @foreach ($products as $product)
+                    {{-- ตัด hover:shadow-lg ออก --}}
+                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden flex flex-col transition-all">
+                        {{-- Image Part --}}
+                        <div class="relative p-3">
+                            <div class="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-900">
+                                {{-- ตัด group-hover:scale-110 ออก --}}
+                                <img src="{{ $product->image ? asset($product->image) : asset('/assets/img/Rent.png') }}"
+                                    alt="{{ $product->product_name }}" class="w-full h-full object-cover">
 
-                <div
-                    class="group bg-white rounded-2xl border border-gray-100 overflow-hidden flex flex-col">
+                                {{-- Badge --}}
+                                <div class="absolute top-0 left-1/2 -translate-x-1/2 z-20">
+                                    <div
+                                        class="bg-red-500 text-white text-[11px] px-5 py-1.5 rounded-b-xl font-medium shadow-sm whitespace-nowrap">
+                                        <i class="fa-solid fa-fire text-[10px] mr-1"></i>สินค้าแนะนำ
+                                    </div>
+                                </div>
 
-                    <div class="relative p-3">
-                        <div
-                            class="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-900">
-                            <img src="{{ asset('/assets/img/Rent.png') }}" alt="Product"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-
-                            <div class="absolute top-0 left-1/2 -translate-x-1/2 z-20">
+                                {{-- Price --}}
                                 <div
-                                    class="bg-red-500 text-white text-[11px] px-5 py-1.5 rounded-b-xl font-medium shadow-md whitespace-nowrap">
-                                    <i class="fa-solid fa-fire text-[10px] mr-1"></i>หมวดหมู่สินค้าขายดี
+                                    class="absolute bottom-3 right-3 bg-purple-600 text-white px-3 py-1 rounded-lg shadow-sm text-sm">
+                                    ฿{{ number_format($product->main_price, 2) }}
                                 </div>
                             </div>
-
-                            <div
-                                class="absolute bottom-3 right-3 bg-purple-600 text-white px-3 py-1 rounded-lg shadow-lg text-sm">
-                                ฿45.00
-                            </div>
                         </div>
-                    </div>
 
-                    <div class="px-5 pb-5 pt-2 flex-grow flex flex-col">
-                        <div class="flex justify-between items-start mb-2">
+                        {{-- Content Part --}}
+                        <div class="px-5 pb-5 pt-2 flex-grow flex flex-col">
                             <span
-                                class="text-[10px] bg-purple-100 text-purple-600 px-2 py-0.5 rounded-md uppercase tracking-wider">
-                                แอพพรีเมี่ยม
+                                class="text-[10px] bg-purple-100 text-purple-600 px-2 py-0.5 rounded-md uppercase tracking-wider self-start mb-2">
+                                {{ $product->category->name ?? 'ทั่วไป' }}
                             </span>
-                            <div class="flex text-yellow-400 text-[10px]">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                    class="fa-solid fa-star text-gray-200"></i>
-                            </div>
-                        </div>
 
-                        <h3
-                            class="text-gray-800 text-lg mb-2 group-hover:text-purple-600 transition-colors uppercase truncate">
-                            NETFLIX PREMIUM
-                        </h3>
+                            {{-- ตัด group-hover:text-purple-600 ออก --}}
+                            <h3 class="text-gray-800 text-lg mb-2 uppercase truncate">
+                                {{ $product->product_name }}
+                            </h3>
 
-                        <p class="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-2">
-                            บริการรับชมความบันเทิงระดับพรีเมียม คมชัดระดับ 4K ใช้งานได้ยาวนาน รับประกันตลอดอายุการใช้งาน...
-                        </p>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-2">
+                                {{ $product->description ?? 'ไม่มีรายละเอียดสินค้า' }}
+                            </p>
 
-                        <div class="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
-                            <div class="flex flex-col">
-                                <span class="text-[11px] text-gray-400 font-medium">ในสต็อก</span>
-                                <span class="text-sm text-gray-700">99+ ชิ้น</span>
-                            </div>
+                            <div class="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <span class="text-[11px] text-gray-400 font-medium">ในสต็อก</span>
+                                    <span class="text-sm text-gray-700">{{ $product->stocks->count() }} ชิ้น</span>
+                                </div>
 
-                            <div class="flex gap-2">
+                                {{-- ตัด hover:bg-purple-700 และ active:scale-90 ออก --}}
                                 <a href="#"
-                                    class="w-10 h-10 bg-purple-600 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-all shadow-md active:scale-90">
+                                    class="w-10 h-10 bg-purple-600 text-white rounded-lg flex items-center justify-center transition">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-                
-                <div
-                    class="group bg-white rounded-2xl border border-gray-100 overflow-hidden flex flex-col">
-
-                    <div class="relative p-3">
-                        <div
-                            class="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-900">
-                            <img src="{{ asset('/assets/img/Rent.png') }}" alt="Product"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-
-                            <div class="absolute top-0 left-1/2 -translate-x-1/2 z-20">
-                                <div
-                                    class="bg-red-500 text-white text-[11px] px-5 py-1.5 rounded-b-xl font-medium shadow-md whitespace-nowrap">
-                                    <i class="fa-solid fa-fire text-[10px] mr-1"></i>หมวดหมู่สินค้าขายดี
-                                </div>
-                            </div>
-
-                            <div
-                                class="absolute bottom-3 right-3 bg-purple-600 text-white px-3 py-1 rounded-lg shadow-lg text-sm">
-                                ฿45.00
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="px-5 pb-5 pt-2 flex-grow flex flex-col">
-                        <div class="flex justify-between items-start mb-2">
-                            <span
-                                class="text-[10px] bg-purple-100 text-purple-600 px-2 py-0.5 rounded-md uppercase tracking-wider">
-                                แอพพรีเมี่ยม
-                            </span>
-                            <div class="flex text-yellow-400 text-[10px]">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                    class="fa-solid fa-star text-gray-200"></i>
-                            </div>
-                        </div>
-
-                        <h3
-                            class="text-gray-800 text-lg mb-2 group-hover:text-purple-600 transition-colors uppercase truncate">
-                            NETFLIX PREMIUM
-                        </h3>
-
-                        <p class="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-2">
-                            บริการรับชมความบันเทิงระดับพรีเมียม คมชัดระดับ 4K ใช้งานได้ยาวนาน รับประกันตลอดอายุการใช้งาน...
-                        </p>
-
-                        <div class="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
-                            <div class="flex flex-col">
-                                <span class="text-[11px] text-gray-400 font-medium">ในสต็อก</span>
-                                <span class="text-sm text-gray-700">99+ ชิ้น</span>
-                            </div>
-
-                            <div class="flex gap-2">
-                                <a href="#"
-                                    class="w-10 h-10 bg-purple-600 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-all shadow-md active:scale-90">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="group bg-white rounded-2xl border border-gray-100 overflow-hidden flex flex-col">
-
-                    <div class="relative p-3">
-                        <div
-                            class="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-900">
-                            <img src="{{ asset('/assets/img/Rent.png') }}" alt="Product"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-
-                            <div class="absolute top-0 left-1/2 -translate-x-1/2 z-20">
-                                <div
-                                    class="bg-red-500 text-white text-[11px] px-5 py-1.5 rounded-b-xl font-medium shadow-md whitespace-nowrap">
-                                    <i class="fa-solid fa-fire text-[10px] mr-1"></i>หมวดหมู่สินค้าขายดี
-                                </div>
-                            </div>
-
-                            <div
-                                class="absolute bottom-3 right-3 bg-purple-600 text-white px-3 py-1 rounded-lg shadow-lg text-sm">
-                                ฿45.00
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="px-5 pb-5 pt-2 flex-grow flex flex-col">
-                        <div class="flex justify-between items-start mb-2">
-                            <span
-                                class="text-[10px] bg-purple-100 text-purple-600 px-2 py-0.5 rounded-md uppercase tracking-wider">
-                                แอพพรีเมี่ยม
-                            </span>
-                            <div class="flex text-yellow-400 text-[10px]">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                    class="fa-solid fa-star text-gray-200"></i>
-                            </div>
-                        </div>
-
-                        <h3
-                            class="text-gray-800 text-lg mb-2 group-hover:text-purple-600 transition-colors uppercase truncate">
-                            NETFLIX PREMIUM
-                        </h3>
-
-                        <p class="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-2">
-                            บริการรับชมความบันเทิงระดับพรีเมียม คมชัดระดับ 4K ใช้งานได้ยาวนาน รับประกันตลอดอายุการใช้งาน...
-                        </p>
-
-                        <div class="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
-                            <div class="flex flex-col">
-                                <span class="text-[11px] text-gray-400 font-medium">ในสต็อก</span>
-                                <span class="text-sm text-gray-700">99+ ชิ้น</span>
-                            </div>
-
-                            <div class="flex gap-2">
-                                <a href="#"
-                                    class="w-10 h-10 bg-purple-600 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-all shadow-md active:scale-90">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="group bg-white rounded-2xl border border-gray-100 overflow-hidden flex flex-col">
-
-                    <div class="relative p-3">
-                        <div
-                            class="relative rounded-xl overflow-hidden aspect-[4/3] bg-gray-900">
-                            <img src="{{ asset('/assets/img/Rent.png') }}" alt="Product"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-
-                            <div class="absolute top-0 left-1/2 -translate-x-1/2 z-20">
-                                <div
-                                    class="bg-red-500 text-white text-[11px] px-5 py-1.5 rounded-b-xl font-medium shadow-md whitespace-nowrap">
-                                    <i class="fa-solid fa-fire text-[10px] mr-1"></i>หมวดหมู่สินค้าขายดี
-                                </div>
-                            </div>
-
-                            <div
-                                class="absolute bottom-3 right-3 bg-purple-600 text-white px-3 py-1 rounded-lg shadow-lg text-sm">
-                                ฿45.00
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="px-5 pb-5 pt-2 flex-grow flex flex-col">
-                        <div class="flex justify-between items-start mb-2">
-                            <span
-                                class="text-[10px] bg-purple-100 text-purple-600 px-2 py-0.5 rounded-md uppercase tracking-wider">
-                                แอพพรีเมี่ยม
-                            </span>
-                            <div class="flex text-yellow-400 text-[10px]">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                    class="fa-solid fa-star text-gray-200"></i>
-                            </div>
-                        </div>
-
-                        <h3
-                            class="text-gray-800 text-lg mb-2 group-hover:text-purple-600 transition-colors uppercase truncate">
-                            NETFLIX PREMIUM
-                        </h3>
-
-                        <p class="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-2">
-                            บริการรับชมความบันเทิงระดับพรีเมียม คมชัดระดับ 4K ใช้งานได้ยาวนาน รับประกันตลอดอายุการใช้งาน...
-                        </p>
-
-                        <div class="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
-                            <div class="flex flex-col">
-                                <span class="text-[11px] text-gray-400 font-medium">ในสต็อก</span>
-                                <span class="text-sm text-gray-700">99+ ชิ้น</span>
-                            </div>
-
-                            <div class="flex gap-2">
-                                <a href="#"
-                                    class="w-10 h-10 bg-purple-600 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-all shadow-md active:scale-90">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
+                @endforeach
             </div>
         </div>
     </section>
@@ -329,7 +138,7 @@
 
     <section class="py-12 font-mitr">
         <div class="max-w-screen-xl mx-auto px-4">
-
+            {{-- Header --}}
             <div class="flex items-start gap-3 mb-6">
                 <div class="bg-purple-600 p-2.5 rounded-lg text-white text-xl shadow-md">
                     <i class="fa-solid fa-circle-info"></i>
@@ -355,7 +164,7 @@
                             <h3 class="text-purple-500 font-medium text-lg">สินค้าทั้งหมด</h3>
                             <p class="text-gray-400 text-[10px] mb-2 uppercase tracking-wide">รวมสินค้าในระบบทั้งสิ้น</p>
                             <div class="bg-purple-500 text-white font-medium py-1.5 px-4 rounded-full text-lg">
-                                157 ชิ้น
+                                {{ number_format($stats['total_products']) }} ชิ้น
                             </div>
                         </div>
                     </div>
@@ -370,10 +179,9 @@
                         </div>
                         <div class="flex-grow text-center">
                             <h3 class="text-purple-600 font-medium text-lg">ผู้ใช้งานระบบ</h3>
-                            <p class="text-gray-400 text-[10px] mb-2 uppercase tracking-wide">รวมผู้ใช้งานในระบบทั้งสิ้น
-                            </p>
+                            <p class="text-gray-400 text-[10px] mb-2 uppercase tracking-wide">รวมผู้ใช้งานในระบบทั้งสิ้น</p>
                             <div class="bg-purple-600 text-white font-medium py-1.5 px-4 rounded-full text-lg">
-                                1626 คน
+                                {{ number_format($stats['total_users']) }} คน
                             </div>
                         </div>
                     </div>
@@ -391,7 +199,7 @@
                             <p class="text-gray-400 text-[10px] mb-2 uppercase tracking-wide">รวมการจำหน่ายสินค้าทั้งสิ้น
                             </p>
                             <div class="bg-purple-700 text-white font-medium py-1.5 px-4 rounded-full text-lg">
-                                29815 ชิ้น
+                                {{ number_format($stats['total_sales']) }} ชิ้น
                             </div>
                         </div>
                     </div>
@@ -408,7 +216,7 @@
                             <h3 class="text-purple-600 font-medium text-lg">คะแนนรีวิว</h3>
                             <p class="text-gray-400 text-[10px] mb-2 uppercase tracking-wide">ความพึงพอใจจากลูกค้า</p>
                             <div class="bg-purple-600 text-white font-medium py-1.5 px-4 rounded-full text-lg">
-                                5.0 / 5.0
+                                {{ number_format($stats['avg_rating'], 1) }} / 5.0
                             </div>
                         </div>
                     </div>
@@ -620,124 +428,6 @@
                                 ทางเรามีคู่มือการใช้งานเบื้องต้นให้ และหากติดปัญหาตรงไหน
                                 สามารถทักแชทหาแอดมินเพื่อขอรีโมทไปช่วยเหลือได้โดยไม่มีค่าใช้จ่ายครับ
                             </p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-
-    <section class="py-12 font-mitr">
-        <div class="max-w-screen-xl mx-auto px-4">
-
-            <div class="flex items-start gap-3 mb-6">
-                <div class="bg-purple-600 p-2.5 rounded-lg text-white text-xl shadow-md">
-                    <i class="fa-solid fa-award"></i>
-                </div>
-                <div>
-                    <h2 class="text-black font-medium text-2xl leading-none">รีวิวจากลูกค้า</h2>
-                    <p class="text-gray-400 text-sm mt-1">เสียงตอบรับและความประทับใจจากผู้ใช้งานจริงของเรา!</p>
-                </div>
-            </div>
-
-            <hr class="border-gray-200 mb-10">
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                <div
-                    class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-md relative group">
-                    <div
-                        class="absolute top-4 right-6 text-purple-100 text-5xl transition-colors group-hover:text-purple-200">
-                        <i class="fa-solid fa-quote-right"></i>
-                    </div>
-
-                    <div class="relative z-10">
-                        <div class="flex text-yellow-400 text-sm mb-4">
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                        </div>
-
-                        <p class="text-gray-600 text-sm leading-relaxed mb-6 italic">
-                            "ประทับใจมากครับ ระบบเช่าเว็บไซต์ NaHost ใช้งานง่ายจริง ๆ จ่ายเงินปุ๊บได้ระบบปั๊บ
-                            แอดมินดูแลดีมาก ตอบไวสุด ๆ แนะนำเลยครับสำหรับใครที่มองหาโฮสดี ๆ"
-                        </p>
-
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-100">
-                                <img src="https://ui-avatars.com/api/?name=Saran&background=7C3AED&color=fff"
-                                    alt="User" class="w-full h-full object-cover">
-                            </div>
-                            <div>
-                                <h4 class="text-gray-800 text-sm">คุณตัวอย่างที่ 1</h4>
-                                <p class="text-gray-400 text-[11px]">ผู้ใช้งานระบบเช่า V.1</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div
-                    class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-md relative group">
-                    <div
-                        class="absolute top-4 right-6 text-purple-100 text-5xl transition-colors group-hover:text-purple-200">
-                        <i class="fa-solid fa-quote-right"></i>
-                    </div>
-                    <div class="relative z-10">
-                        <div class="flex text-yellow-400 text-sm mb-4">
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                        </div>
-                        <p class="text-gray-600 text-sm leading-relaxed mb-6 italic">
-                            "ตอนแรกกังวลว่าจะติดตั้งยาก แต่ระบบ Patch V1.0.0 ทำออกมาดีมากครับ
-                            กดไม่กี่ทีเว็บไซต์ก็ออนไลน์แล้ว คุ้มค่าเงินที่จ่ายไปมากครับ"
-                        </p>
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-100">
-                                <img src="https://ui-avatars.com/api/?name=Peak&background=7C3AED&color=fff"
-                                    alt="User" class="w-full h-full object-cover">
-                            </div>
-                            <div>
-                                <h4 class="text-gray-800 text-sm">คุณตัวอย่างที่ 2</h4>
-                                <p class="text-gray-400 text-[11px]">ลูกค้าประจำ</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div
-                    class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-md relative group">
-                    <div
-                        class="absolute top-4 right-6 text-purple-100 text-5xl transition-colors group-hover:text-purple-200">
-                        <i class="fa-solid fa-quote-right"></i>
-                    </div>
-                    <div class="relative z-10">
-                        <div class="flex text-yellow-400 text-sm mb-4">
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                        </div>
-                        <p class="text-gray-600 text-sm leading-relaxed mb-6 italic">
-                            "ราคาเป็นกันเองมากเมื่อเทียบกับสิ่งที่ได้รับ ความปลอดภัยของระบบคือยืนหนึ่งจริงๆ
-                            สบายใจเวลาทำธุรกรรมผ่านหน้าเว็บครับ"
-                        </p>
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-100">
-                                <img src="https://ui-avatars.com/api/?name=User3&background=7C3AED&color=fff"
-                                    alt="User" class="w-full h-full object-cover">
-                            </div>
-                            <div>
-                                <h4 class="text-gray-800 text-sm">คุณตัวอย่างที่ 3</h4>
-                                <p class="text-gray-400 text-[11px]">เจ้าของเว็บไซต์ร้านค้า</p>
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -15,32 +15,43 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
 
-            <div class="bg-white rounded-xl p-6 border border-slate-200 flex flex-col items-center justify-center text-center">
-                <div class="w-16 h-16 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center text-3xl mb-4">
+            <div
+                class="bg-white rounded-xl p-6 border border-slate-200 flex flex-col items-center justify-center text-center">
+                <div
+                    class="w-16 h-16 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center text-3xl mb-4">
                     <i class="fa-solid fa-user"></i>
                 </div>
-                <h3 class="text-xl font-medium text-[#7C3AED]">เข้าชมเว็บ <span class="text-slate-700">1,204</span> คน</h3>
+                <h3 class="text-xl font-medium text-[#7C3AED]">สมาชิกเว็บ <span
+                        class="text-slate-700">{{ number_format($totalUsers) }}</span> คน</h3>
             </div>
 
-            <div class="bg-white rounded-xl p-6 border border-slate-200 flex flex-col items-center justify-center text-center">
-                <div class="w-16 h-16 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-3xl mb-4">
+            <div
+                class="bg-white rounded-xl p-6 border border-slate-200 flex flex-col items-center justify-center text-center">
+                <div
+                    class="w-16 h-16 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-3xl mb-4">
                     <i class="fa-solid fa-coins"></i>
                 </div>
-                <h3 class="text-xl font-medium text-[#7C3AED]">รวมยอด <span class="text-slate-700">14,500</span> ฿</h3>
+                <h3 class="text-xl font-medium text-[#7C3AED]">รวมยอด <span
+                        class="text-slate-700">{{ number_format($totalRevenue, 2) }}</span> ฿</h3>
             </div>
 
-            <div class="bg-white rounded-xl p-6 border border-slate-200 flex flex-col items-center justify-center text-center">
+            <div
+                class="bg-white rounded-xl p-6 border border-slate-200 flex flex-col items-center justify-center text-center">
                 <div class="w-16 h-16 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center text-3xl mb-4">
                     <i class="fa-solid fa-basket-shopping"></i>
                 </div>
-                <h3 class="text-xl font-medium text-[#7C3AED]">สต็อกทั้งหมด <span class="text-slate-700">86</span> ชิ้น</h3>
+                <h3 class="text-xl font-medium text-[#7C3AED]">สต็อกทั้งหมด <span
+                        class="text-slate-700">{{ number_format($totalStock) }}</span> ชิ้น</h3>
             </div>
 
-            <div class="bg-white rounded-xl p-6 border border-slate-200 flex flex-col items-center justify-center text-center">
-                <div class="w-16 h-16 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center text-3xl mb-4">
+            <div
+                class="bg-white rounded-xl p-6 border border-slate-200 flex flex-col items-center justify-center text-center">
+                <div
+                    class="w-16 h-16 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center text-3xl mb-4">
                     <i class="fa-solid fa-users"></i>
                 </div>
-                <h3 class="text-xl font-medium text-[#7C3AED]"><span class="text-slate-700">100</span> Online</h3>
+                <h3 class="text-xl font-medium text-[#7C3AED]">แอดมินเว็บ <span class="text-slate-700">
+                        {{ number_format($onlineUsers) }}</span> คน</h3>
             </div>
 
         </div>
@@ -50,7 +61,8 @@
             <div class="bg-white rounded-xl p-6 border border-slate-200 lg:col-span-2">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-lg font-medium text-slate-800">สถิติรายได้ 7 วันล่าสุด</h2>
-                    <span class="text-xs font-medium text-emerald-500 bg-emerald-50 px-2 py-1 rounded-lg">+12% จากสัปดาห์ก่อน</span>
+                    <span class="text-xs font-medium text-emerald-500 bg-emerald-50 px-2 py-1 rounded-lg">+12%
+                        จากสัปดาห์ก่อน</span>
                 </div>
                 <div id="revenueChart" class="w-full"></div>
             </div>
@@ -65,16 +77,19 @@
         </div>
 
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
 
+            const revenueLabels = @json($days);
+            const revenueValues = @json($revenueData);
+            const donutLabels = @json($salesLabels);
+            const donutSeries = @json($salesSeries);
+
+            // --- Revenue Area Chart ---
             var revenueOptions = {
                 series: [{
                     name: 'รายได้ (บาท)',
-                    data: [1500, 2300, 1800, 3200, 2800, 4100, 3800]
+                    data: revenueValues
                 }],
                 chart: {
                     type: 'area',
@@ -82,116 +97,58 @@
                     fontFamily: 'Mitr, sans-serif',
                     toolbar: {
                         show: false
-                    },
-                    zoom: {
-                        enabled: false
                     }
                 },
                 colors: ['#7C3AED'],
-                fill: {
-                    type: 'gradient',
-                    gradient: {
-                        shadeIntensity: 1,
-                        opacityFrom: 0.4,
-                        opacityTo: 0.05,
-                        stops: [0, 90, 100]
-                    }
-                },
-                dataLabels: {
-                    enabled: false
-                },
                 stroke: {
                     curve: 'smooth',
                     width: 3
                 },
                 xaxis: {
-                    categories: ['จันทร์', 'อังคาร', 'พุธ', 'พฤหัส', 'ศุกร์', 'เสาร์', 'อาทิตย์'],
-                    axisBorder: {
-                        show: false
-                    },
-                    axisTicks: {
-                        show: false
-                    },
-                    labels: {
-                        style: {
-                            colors: '#94a3b8'
-                        }
-                    }
+                    categories: revenueLabels
                 },
                 yaxis: {
                     labels: {
-                        style: {
-                            colors: '#94a3b8'
-                        },
                         formatter: function(value) {
-                            return "฿" + value;
+                            return "฿" + value.toLocaleString();
                         }
                     }
-                },
-                grid: {
-                    borderColor: '#f1f5f9',
-                    strokeDashArray: 4,
                 }
             };
+            new ApexCharts(document.querySelector("#revenueChart"), revenueOptions).render();
 
-            var revenueChart = new ApexCharts(document.querySelector("#revenueChart"), revenueOptions);
-            revenueChart.render();
-
+            // --- Sales Donut Chart ---
             var salesOptions = {
-                series: [45, 30, 25],
-                labels: ['เช่าเซิร์ฟเวอร์', 'เติมเงิน', 'สินค้าอื่นๆ'],
+                series: donutSeries.length > 0 ? donutSeries : [0],
+                labels: donutLabels.length > 0 ? donutLabels : ['ยังไม่มีข้อมูล'],
                 chart: {
                     type: 'donut',
                     height: 320,
-                    fontFamily: 'Mitr, sans-serif',
+                    fontFamily: 'Mitr, sans-serif'
                 },
-                colors: ['#7C3AED', '#38bdf8', '#fbbf24'],
+                colors: ['#7C3AED', '#38bdf8', '#fbbf24', '#f87171', '#4ade80'],
                 plotOptions: {
                     pie: {
                         donut: {
                             size: '70%',
                             labels: {
                                 show: true,
-                                name: {
-                                    fontSize: '14px',
-                                    color: '#64748b'
-                                },
-                                value: {
-                                    fontSize: '24px',
-                                    fontWeight: 500,
-                                    color: '#1e293b',
-                                    formatter: function(val) {
-                                        return val + "%"
-                                    }
-                                },
                                 total: {
                                     show: true,
-                                    showAlways: true,
-                                    label: 'ยอดฮิต',
-                                    fontSize: '14px',
-                                    color: '#64748b'
+                                    label: 'รายการทั้งหมด',
+                                    formatter: function(w) {
+                                        return w.globals.seriesTotals.reduce((a, b) => a + b, 0)
+                                    }
                                 }
                             }
                         }
                     }
                 },
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    show: false
-                },
                 legend: {
-                    position: 'bottom',
-                    markers: {
-                        radius: 12
-                    }
+                    position: 'bottom'
                 }
             };
-
-            var salesChart = new ApexCharts(document.querySelector("#salesChart"), salesOptions);
-            salesChart.render();
-
+            new ApexCharts(document.querySelector("#salesChart"), salesOptions).render();
         });
     </script>
 @endsection

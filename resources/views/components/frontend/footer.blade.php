@@ -55,11 +55,11 @@
                 <ul class="flex flex-col gap-3">
                     <li><a href="{{ route('home') }}"
                             class="text-gray-500 text-sm hover:text-purple-600 transition-colors">หน้าแรก</a></li>
-                    <li><a href="{{ route('products') }}"
+                    <li><a href="{{ route('frontend.products') }}"
                             class="text-gray-500 text-sm hover:text-purple-600 transition-colors">สินค้าหลัก</a></li>
-                    <li><a href="{{ route('game-topup') }}"
+                    <li><a href="{{ route('frontend.game.index') }}"
                             class="text-gray-500 text-sm hover:text-purple-600 transition-colors">เติมเกม</a></li>
-                    <li><a href="{{ route('topup') }}"
+                    <li><a href="{{ route('frontend.topup') }}"
                             class="text-gray-500 text-sm hover:text-purple-600 transition-colors">เติมเงิน</a></li>
                 </ul>
             </div>
