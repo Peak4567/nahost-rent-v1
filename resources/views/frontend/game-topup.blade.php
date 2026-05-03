@@ -15,7 +15,6 @@
             </div>
         </div>
 
-        {{-- ระบบค้นหา --}}
         <form action="{{ route('frontend.game.index') }}" method="GET" class="bg-white p-3 rounded-2xl border border-gray-100 mb-10 flex flex-col md:flex-row gap-3">
             <div class="relative flex-grow">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
